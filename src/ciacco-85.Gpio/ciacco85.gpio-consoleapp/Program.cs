@@ -14,6 +14,11 @@ internal static class Program
             {
                 ledManager.SwitchAllLed();
                 await ledManager.StartupProcedure();
+                Console.WriteLine("Finish");
+            }
+            else
+            {
+                Console.WriteLine("Failed Init");
             }
         }
         catch (Exception ex)

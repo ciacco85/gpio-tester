@@ -1,4 +1,5 @@
 ﻿using System.Device.Gpio;
+using System.Device.Gpio.Drivers;
 
 namespace GLEMA.IoT.Badger.Device;
 
@@ -20,17 +21,20 @@ public class LedManager : ILedManager
 
     public LedManager()
     {
-        gpioController = new(() => new GpioController());
+#pragma warning disable SDGPIO0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        gpioController = new(() => new GpioController(PinNumberingScheme.Logical, new LibGpiodDriver(0, LibGpiodDriverVersion.V1)));
+#pragma warning restore SDGPIO0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
     }
     public bool Init()
     {
         try
-        {            
+        {
             var info = _gpioController.QueryComponentInformation();
             return true;
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.ToString());
             return false;
         }
 
