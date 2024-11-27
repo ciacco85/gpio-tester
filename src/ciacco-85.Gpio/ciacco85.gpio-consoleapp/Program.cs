@@ -4,7 +4,7 @@ namespace ciacco85.gpio_consoleapp;
 
 internal static class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         try
         {
@@ -12,7 +12,8 @@ internal static class Program
             ILedManager ledManager = new LedManager();
             if (ledManager.Init())
             {
-                ledManager.StartupProcedure();
+                ledManager.SwitchAllLed();
+                await ledManager.StartupProcedure();
             }
         }
         catch (Exception ex)
