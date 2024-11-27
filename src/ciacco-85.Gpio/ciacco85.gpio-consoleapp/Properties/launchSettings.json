@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ciacco85.gpio-consoleapp": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
