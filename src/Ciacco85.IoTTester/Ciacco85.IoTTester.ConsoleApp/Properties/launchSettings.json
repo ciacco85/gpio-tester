@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ciacco85.gpio-consoleapp": {
+    "Ciacco85.IoTTester.ConsoleApp": {
       "commandName": "Project"
     },
     "Container (Dockerfile)": {

@@ -1,7 +1,11 @@
-﻿using System.Device.Gpio;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.Device.Gpio;
 using System.Device.Gpio.Drivers;
-
-namespace GLEMA.IoT.Badger.Device;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 public interface ILedManager
 {
