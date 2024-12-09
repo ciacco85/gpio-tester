@@ -16,9 +16,11 @@ public class TestProjectFixture : TestBedFixture
 {
     protected override void AddServices(IServiceCollection services, IConfiguration? configuration) => services
         .AddTransient<IPn532ManagerTest, Pn532ManagerTest>()
+        .AddLogging()
         .Configure<BadgerSettings>(config => configuration?.GetSection("BadgerSettings").Bind(config))        
         ;
-
+//    builder.Logging.ClearProviders();
+//builder.Logging.AddConsole();
     protected override ValueTask DisposeAsyncCore() => new();
 
     protected override IEnumerable<TestAppSettings> GetTestAppSettings()
