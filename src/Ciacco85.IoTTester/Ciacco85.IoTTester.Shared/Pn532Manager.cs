@@ -40,9 +40,6 @@ public class Pn532Manager : IPn532Manager
             else
             {
                 I2cDevice? _i2cDevice = I2cDevice.Create(new I2cConnectionSettings(1, Pn532.I2cDefaultAddress));
-                _i2cDevice.Dispose();
-                throw new HardwareException("Custom i2c dispose", HardwareDevice.PN532);
-                _i2cDevice = I2cDevice.Create(new I2cConnectionSettings(1, Pn532.I2cDefaultAddress));
                 if (_i2cDevice != null)
                 {
                     _logger.LogInformation("I2C info: {0}", _i2cDevice.QueryComponentInformation().ToString());
