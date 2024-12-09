@@ -28,7 +28,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
         //    _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
         //});
 
-        Parallel.For(0, 1000, async index =>
+        Parallel.For(0, 100000, async index =>
         {
             var calculatedValue = await manager.Test();
             _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
