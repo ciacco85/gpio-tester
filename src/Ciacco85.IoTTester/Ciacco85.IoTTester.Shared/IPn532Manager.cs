@@ -1,8 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ciacco85.IoTTester.Shared;
+
+
+
+
+public interface IPn532ManagerTest : IPn532Manager
+{
+    Task<Memory<byte>> Test();
+}
 
 public interface IPn532Manager
 {

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciacco85.IoTTester.ConsoleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciacco85.IoTTester.Shared", "Ciacco85.IoTTester.Shared\Ciacco85.IoTTester.Shared.csproj", "{DC4ED9FE-140F-4D63-9426-33EB85ABB323}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciacco85.IoTTester.Tests", "Ciacco85.IoTTester.Tests\Ciacco85.IoTTester.Tests.csproj", "{019D90F6-C3D2-4B54-9104-58C1376FC8ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DC4ED9FE-140F-4D63-9426-33EB85ABB323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC4ED9FE-140F-4D63-9426-33EB85ABB323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC4ED9FE-140F-4D63-9426-33EB85ABB323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019D90F6-C3D2-4B54-9104-58C1376FC8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019D90F6-C3D2-4B54-9104-58C1376FC8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019D90F6-C3D2-4B54-9104-58C1376FC8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019D90F6-C3D2-4B54-9104-58C1376FC8ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

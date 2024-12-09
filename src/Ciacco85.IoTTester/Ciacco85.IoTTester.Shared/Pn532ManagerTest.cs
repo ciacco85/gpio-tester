@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Ciacco85.IoTTester.Shared;
 
-public class Pn532ManagerTest : Pn532Manager
+public class Pn532ManagerTest : Pn532Manager, IPn532ManagerTest
 {
     public Pn532ManagerTest(ILogger<Pn532ManagerTest> logger, IOptions<BadgerSettings> badgerSettings)
         : base(logger, badgerSettings)
@@ -21,9 +21,10 @@ public class Pn532ManagerTest : Pn532Manager
 
     }
 
-    public async Task Test()
+    public async Task<Memory<byte>> Test()
     {
         var nfcData = ListPassiveTargetAndGetMifareUUID();
+        return nfcData.uuid;
     }
 
     public override (Memory<byte> passiveTarget, Memory<byte> uuid) ListPassiveTargetAndGetMifareUUID()
