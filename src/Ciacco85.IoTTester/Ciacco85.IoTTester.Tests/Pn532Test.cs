@@ -9,7 +9,7 @@ namespace Ciacco85.IoTTester.Tests;
 public class Pn532Test : TestBed<TestProjectFixture>
 {
     private readonly BadgerSettings _options;
-    public Pn532Test(ITestOutputHelper testOutputHelper, TestProjectFixture fixture, ILogger<Pn532Test> logger)
+    public Pn532Test(ITestOutputHelper testOutputHelper, TestProjectFixture fixture)
        : base(testOutputHelper, fixture)
     {
         _options = _fixture.GetService<IOptions<BadgerSettings>>(_testOutputHelper)!.Value;
