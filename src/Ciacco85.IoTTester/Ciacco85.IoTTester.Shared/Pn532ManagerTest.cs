@@ -61,7 +61,7 @@ public class Pn532ManagerTest : Pn532Manager, IPn532ManagerTest
             MifareCard mifareCard = new MifareCard(_pn532, card.TargetNumber)
             {
                 BlockNumber = block,
-                Command = MifareCardCommand.AuthenticationA
+                Command = MifareCardCommand.AuthenticationB
             };
             mifareCard.SetCapacity(card.Atqa, card.Sak);
             mifareCard.SerialNumber = card.NfcId;
@@ -75,7 +75,7 @@ public class Pn532ManagerTest : Pn532Manager, IPn532ManagerTest
             {
                 // Try another one
                 _logger.LogInformation("MifareCard authentication error with command {Command}", mifareCard.Command);
-                mifareCard.Command = MifareCardCommand.AuthenticationB;
+                mifareCard.Command = MifareCardCommand.AuthenticationA;
                 AddDelay();
                 ret = mifareCard.RunMifareCardCommand();
             }
