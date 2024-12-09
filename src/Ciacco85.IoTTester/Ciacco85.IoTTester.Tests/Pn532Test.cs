@@ -34,7 +34,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
             _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
 
         });
-
+        
         Assert.True(true);
     }
 }
