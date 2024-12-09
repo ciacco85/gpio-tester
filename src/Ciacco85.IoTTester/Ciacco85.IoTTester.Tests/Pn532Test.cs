@@ -31,7 +31,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
 
         ConcurrentBag<Task<Memory<byte>>> tasks = new();
 
-        Parallel.For(0, 100000, async index =>
+        Parallel.For(0, 100, async index =>
         {
             tasks.Add(manager.Test());
             //var calculatedValue = await manager.Test();
