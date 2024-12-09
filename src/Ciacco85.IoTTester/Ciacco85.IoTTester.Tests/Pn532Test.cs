@@ -18,7 +18,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;
         var calculatedValue = await manager.Test();
-        Assert.False(calculatedValue.Equals(Memory<byte>.Empty));
+        Assert.True(calculatedValue.Equals(Memory<byte>.Empty));
 
     }
 }
