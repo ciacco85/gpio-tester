@@ -2,6 +2,7 @@
 using Iot.Device.Card.Mifare;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Collections.Concurrent;
 using Xunit.Abstractions;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 
@@ -28,13 +29,20 @@ public class Pn532Test : TestBed<TestProjectFixture>
         //    _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
         //});
 
+        ConcurrentBag<Task<Memory<byte>>> tasks = new();
+
         Parallel.For(0, 100000, async index =>
         {
-            var calculatedValue = await manager.Test();
-            _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
+            tasks.Add(manager.Test());
+            //var calculatedValue = await manager.Test();
+            //_testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
 
         });
-        
+        await Task.WhenAll(tasks);
+        foreach (var task in tasks)
+        {
+            _testOutputHelper.WriteLine($"Iteration {task.Id}; Data: {(task.Result.IsEmpty ? "N/A" : BitConverter.ToString(task.Result.ToArray()))}");
+        }
         Assert.True(true);
     }
 }
