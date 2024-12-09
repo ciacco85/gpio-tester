@@ -23,8 +23,16 @@ public class Pn532ManagerTest : Pn532Manager, IPn532ManagerTest
 
     public async Task<Memory<byte>> Test()
     {
-        var nfcData = ListPassiveTargetAndGetMifareUUID();
-        return nfcData.uuid;
+        try
+        {
+            await _semaphoreSlim.WaitAsync();
+            var nfcData = ListPassiveTargetAndGetMifareUUID();
+            return nfcData.uuid;
+        }
+        finally
+        {
+            _semaphoreSlim.Release();
+        }
     }
 
     public override (Memory<byte> passiveTarget, Memory<byte> uuid) ListPassiveTargetAndGetMifareUUID()

@@ -18,6 +18,7 @@ public class Pn532Manager : IPn532Manager
     protected readonly BadgerSettings _settings;
     protected readonly Lazy<Pn532> pn532;
     protected Pn532 _pn532 { get => pn532.Value; }
+    protected readonly SemaphoreSlim _semaphoreSlim = new(1, 1);
     protected TimeSpan _pn532AccessDelay = TimeSpan.FromMilliseconds(150);
 
     public Pn532Manager(ILogger<Pn532Manager> logger, IOptions<BadgerSettings> badgerSettings)
@@ -40,6 +41,7 @@ public class Pn532Manager : IPn532Manager
             else
             {
                 I2cDevice? _i2cDevice = I2cDevice.Create(new I2cConnectionSettings(1, Pn532.I2cDefaultAddress));
+                //_i2cDevice.
                 if (_i2cDevice != null)
                 {
                     _logger.LogInformation("I2C info: {0}", _i2cDevice.QueryComponentInformation().ToString());

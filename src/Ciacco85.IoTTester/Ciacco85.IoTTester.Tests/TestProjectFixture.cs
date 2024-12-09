@@ -15,7 +15,7 @@ namespace Ciacco85.IoTTester.Tests;
 public class TestProjectFixture : TestBedFixture
 {
     protected override void AddServices(IServiceCollection services, IConfiguration? configuration) => services
-        .AddTransient<IPn532ManagerTest, Pn532ManagerTest>()
+        .AddSingleton<IPn532ManagerTest, Pn532ManagerTest>()
         .AddLogging()
         .Configure<BadgerSettings>(config => configuration?.GetSection("BadgerSettings").Bind(config))        
         ;
