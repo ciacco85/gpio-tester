@@ -23,7 +23,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;        
         Parallel.For(0, 1000, new ParallelOptions() { MaxDegreeOfParallelism = 4 }, async a =>
         {
-            _testOutputHelper.WriteLine("Iteration {Count}", a);
+            _testOutputHelper.WriteLine($"Iteration {a}");
             var calculatedValue = await manager.Test();
             Assert.True(calculatedValue.Equals(Memory<byte>.Empty));
         });
