@@ -21,7 +21,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
     public async Task Test()
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;        
-        Parallel.For(0, 1000, new ParallelOptions() { MaxDegreeOfParallelism = 4 }, async a =>
+        Parallel.For(0, 100000, new ParallelOptions(), async a =>
         {
             _testOutputHelper.WriteLine($"Iteration {a}");
             var calculatedValue = await manager.Test();
