@@ -1,4 +1,5 @@
 ﻿using Ciacco85.IoTTester.Shared;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Xunit.Abstractions;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
@@ -17,8 +18,13 @@ public class Pn532Test : TestBed<TestProjectFixture>
     public async Task Test()
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;
-        var calculatedValue = await manager.Test();
-        Assert.True(calculatedValue.Equals(Memory<byte>.Empty));
+        var logger = _fixture.GetService<ILogger>(_testOutputHelper);
+        Parallel.For(0, 1000, new ParallelOptions() { MaxDegreeOfParallelism = 4 }, async a =>
+        {
+            logger.LogInformation("Iteration {Count}", a);
+            var calculatedValue = await manager.Test();
+            Assert.True(calculatedValue.Equals(Memory<byte>.Empty));
+        });
 
     }
 }
