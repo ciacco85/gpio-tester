@@ -22,10 +22,17 @@ public class Pn532Test : TestBed<TestProjectFixture>
     public async Task Test()
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;
-        await Parallel.ForEachAsync(Enumerable.Range(0,100), new ParallelOptions(), async (a, token) =>
+        //await Parallel.ForEachAsync(Enumerable.Range(0, 100), new ParallelOptions(), async (index, token) =>
+        //{
+        //    var calculatedValue = await manager.Test();
+        //    _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
+        //});
+
+        Parallel.For(0, 1000, async index =>
         {
             var calculatedValue = await manager.Test();
-            _testOutputHelper.WriteLine($"Iteration {a}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
+            _testOutputHelper.WriteLine($"Iteration {index}; Data: {(calculatedValue.IsEmpty ? "N/A" : BitConverter.ToString(calculatedValue.ToArray()))}");
+
         });
 
         Assert.True(true);
