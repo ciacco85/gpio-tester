@@ -29,6 +29,10 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                     await Task.Delay(2000, cts.Token);
                     _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
                 }
+                catch
+                {
+                    _testOutputHelper.WriteLine("Catch in while");
+                }
                 finally
                 {
                     _semaphoreSlim.Release();
