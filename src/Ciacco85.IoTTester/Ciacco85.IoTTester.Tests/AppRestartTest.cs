@@ -20,7 +20,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
         try
         {
             SemaphoreSlim _semaphoreSlim = new(1, 1);
-            PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(periodicTimerDelayMs));
+            PeriodicTimer RunTimer = new(TimeSpan.FromMilliseconds(periodicTimerDelayMs));
             TimeSpan untilRestart = TimeSpan.FromSeconds(durationS);
             using CancellationTokenSource cts = new(untilRestart);
 
@@ -32,10 +32,9 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                     await Task.Delay(delayMs, cts.Token);
                     _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
                 }
-                catch
+                catch(Exception ex)
                 {
-                    _testOutputHelper.WriteLine("Catch in while");
-                    //throw;
+                    _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Catch in while {ex.ToString()}");
                 }
                 finally
                 {
@@ -59,7 +58,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
         //}
         catch (Exception ex)
         {
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} External catch {ex.ToString()}");
             if (ex is TaskCanceledException || ex is OperationCanceledException)
             {
                 _testOutputHelper.WriteLine("OK");
