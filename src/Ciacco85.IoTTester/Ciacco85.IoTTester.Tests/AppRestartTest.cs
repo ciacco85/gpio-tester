@@ -1,9 +1,4 @@
-﻿using Ciacco85.IoTTester.Shared;
-using Iot.Device.Card.Mifare;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System.Collections.Concurrent;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 
 namespace Ciacco85.IoTTester.Tests;
@@ -20,13 +15,24 @@ public class AppRestartTest : TestBed<TestProjectFixture>
     {
         try
         {
-            PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(100));
+            SemaphoreSlim _semaphoreSlim = new(1, 1);
+            PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(1000));
             TimeSpan untilRestart = TimeSpan.FromSeconds(5);
             using CancellationTokenSource cts = new(untilRestart);
 
             while (!cts.IsCancellationRequested && await RunTimer.WaitForNextTickAsync(cts.Token))
             {
-                _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
+
+                try
+                {
+                    await _semaphoreSlim.WaitAsync(cts.Token);
+                    await Task.Delay(200);
+                    _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
+                }
+                finally
+                {
+                    _semaphoreSlim.Release();
+                }
             }
             Assert.True(true);
         }
