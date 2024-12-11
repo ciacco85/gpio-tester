@@ -17,10 +17,10 @@ public class Pn532Test : TestBed<TestProjectFixture>
         _options = _fixture.GetService<IOptions<BadgerSettings>>(_testOutputHelper)!.Value;
     }
 
-    //[Theory]
-    //[InlineData(1, 2)]
-    [Fact]
-    public async Task ConcurrentPn532Access()
+    [Theory]
+    [InlineData(100)]
+    
+    public async Task ConcurrentPn532Access(int repetition)
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;
         //await Parallel.ForEachAsync(Enumerable.Range(0, 100), new ParallelOptions(), async (index, token) =>
@@ -31,7 +31,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
 
         ConcurrentBag<Task<Memory<byte>>> tasks = new();
 
-        Parallel.For(0, 100, async index =>
+        Parallel.For(0, repetition, index =>
         {
             tasks.Add(manager.Test());
             //var calculatedValue = await manager.Test();

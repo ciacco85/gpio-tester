@@ -42,7 +42,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                     _semaphoreSlim.Release();
                 }
             }
-            Assert.True(true);
+            _testOutputHelper.WriteLine("Exited while without exception");
         }
         //catch (TaskCanceledException ex)
         //{
@@ -63,7 +63,6 @@ public class AppRestartTest : TestBed<TestProjectFixture>
             if (ex is TaskCanceledException || ex is OperationCanceledException)
             {
                 _testOutputHelper.WriteLine("OK");
-                Assert.True(true);
             }
             else
             {
@@ -72,5 +71,6 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                 throw;
             }
         }
+        Assert.True(true);
     }
 }
