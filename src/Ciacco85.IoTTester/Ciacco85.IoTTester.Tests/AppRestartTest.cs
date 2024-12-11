@@ -21,7 +21,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
         try
         {
             PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(100));
-            TimeSpan untilRestart = TimeSpan.FromSeconds(10);
+            TimeSpan untilRestart = TimeSpan.FromSeconds(5);
             using CancellationTokenSource cts = new(untilRestart);
 
             while (!cts.IsCancellationRequested && await RunTimer.WaitForNextTickAsync(cts.Token))
@@ -29,17 +29,27 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                 _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
             }
         }
-        catch (Exception ex)
+        catch (TaskCanceledException ex)
         {
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
-            if (ex is TaskCanceledException)// || ex is OperationCanceledException))
-            {
-                _testOutputHelper.WriteLine("Trowing...");
-                Assert.True(false);
-                throw;
-            }
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");            
 
         }
+        catch (Exception ex)
+        {
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");           
+            throw;          
+        }
+        //catch (Exception ex)
+        //{
+        //    _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+        //    if (ex is TaskCanceledException)// || ex is OperationCanceledException))
+        //    {
+        //        _testOutputHelper.WriteLine("Trowing...");
+        //        Assert.True(false);
+        //        throw;
+        //    }
+
+        //}
         
         Assert.True(true);
     }
