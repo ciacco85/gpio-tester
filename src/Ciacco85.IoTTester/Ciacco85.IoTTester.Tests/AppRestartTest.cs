@@ -12,6 +12,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
 
     [Theory]
     [InlineData(1000, 2000, 5)]
+    [InlineData(2000, 1000, 5)]
     public async Task Run(int periodicTimerDelayMs, int delayMs, int durationS)
     {
         try
@@ -33,6 +34,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                 catch
                 {
                     _testOutputHelper.WriteLine("Catch in while");
+                    throw;
                 }
                 finally
                 {
