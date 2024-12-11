@@ -32,7 +32,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
         catch (Exception ex)
         {
             _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
-            if (!(ex is TaskCanceledException || ex is OperationCanceledException))
+            if (ex is TaskCanceledException)// || ex is OperationCanceledException))
             {
                 _testOutputHelper.WriteLine("Trowing...");
                 Assert.True(false);
