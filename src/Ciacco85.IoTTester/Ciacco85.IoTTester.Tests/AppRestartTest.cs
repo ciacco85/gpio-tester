@@ -32,11 +32,13 @@ public class AppRestartTest : TestBed<TestProjectFixture>
         }
         catch (TaskCanceledException ex)
         {
+            _testOutputHelper.WriteLine("OK");
             _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
             Assert.True(true);
         }
         catch (Exception ex)
         {
+            _testOutputHelper.WriteLine("KO");
             _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
             Assert.True(false);
             throw;          
