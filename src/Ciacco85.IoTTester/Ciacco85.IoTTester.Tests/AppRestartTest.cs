@@ -11,8 +11,8 @@ public class AppRestartTest : TestBed<TestProjectFixture>
     }
 
     [Theory]
-    [InlineData(1000, 2000, 5)]
-    [InlineData(2000, 1000, 5)]
+    [InlineData(500, 1000, 5)]
+    [InlineData(1000, 500, 5)]
     [InlineData(10, 1000, 5)]
     [InlineData(1000, 10, 5)]
     public async Task Run(int periodicTimerDelayMs, int delayMs, int durationS)
