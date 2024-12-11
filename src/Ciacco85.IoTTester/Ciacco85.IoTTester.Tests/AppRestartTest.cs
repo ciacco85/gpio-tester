@@ -10,14 +10,15 @@ public class AppRestartTest : TestBed<TestProjectFixture>
     {
     }
 
-    [Fact]
-    public async Task ConcurrentPn532Access()
+    [Theory]
+    [InlineData(1000, 2000, 5)]
+    public async Task Run(int periodicTimerDelayMs, int delayMs, int durationS)
     {
         try
         {
             SemaphoreSlim _semaphoreSlim = new(1, 1);
-            PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(1000));
-            TimeSpan untilRestart = TimeSpan.FromSeconds(5);
+            PeriodicTimer RunTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(periodicTimerDelayMs));
+            TimeSpan untilRestart = TimeSpan.FromSeconds(durationS);
             using CancellationTokenSource cts = new(untilRestart);
 
             while (!cts.IsCancellationRequested && await RunTimer.WaitForNextTickAsync(cts.Token))
@@ -26,7 +27,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                 try
                 {
                     await _semaphoreSlim.WaitAsync(cts.Token);
-                    await Task.Delay(2000, cts.Token);
+                    await Task.Delay(delayMs, cts.Token);
                     _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
                 }
                 catch
