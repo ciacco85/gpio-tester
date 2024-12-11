@@ -28,15 +28,17 @@ public class AppRestartTest : TestBed<TestProjectFixture>
             {
                 _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
             }
+            Assert.True(true);
         }
         catch (TaskCanceledException ex)
         {
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");            
-
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+            Assert.True(true);
         }
         catch (Exception ex)
         {
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");           
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+            Assert.True(false);
             throw;          
         }
         //catch (Exception ex)
@@ -51,6 +53,6 @@ public class AppRestartTest : TestBed<TestProjectFixture>
 
         //}
         
-        Assert.True(true);
+        
     }
 }
