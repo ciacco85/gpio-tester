@@ -20,7 +20,7 @@ public class Pn532Test : TestBed<TestProjectFixture>
     //[Theory]
     //[InlineData(1, 2)]
     [Fact]
-    public async Task Test()
+    public async Task ConcurrentPn532Access()
     {
         var manager = _fixture.GetService<IPn532ManagerTest>(_testOutputHelper)!;
         //await Parallel.ForEachAsync(Enumerable.Range(0, 100), new ParallelOptions(), async (index, token) =>

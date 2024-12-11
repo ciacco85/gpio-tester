@@ -19,8 +19,8 @@ public class TestProjectFixture : TestBedFixture
         .AddLogging()
         .Configure<BadgerSettings>(config => configuration?.GetSection("BadgerSettings").Bind(config))        
         ;
-//    builder.Logging.ClearProviders();
-//builder.Logging.AddConsole();
+
+
     protected override ValueTask DisposeAsyncCore() => new();
 
     protected override IEnumerable<TestAppSettings> GetTestAppSettings()
