@@ -26,7 +26,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
                 try
                 {
                     await _semaphoreSlim.WaitAsync(cts.Token);
-                    await Task.Delay(2000);
+                    await Task.Delay(2000, cts.Token);
                     _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} Running...");
                 }
                 finally
