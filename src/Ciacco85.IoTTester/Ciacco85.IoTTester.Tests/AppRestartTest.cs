@@ -14,7 +14,7 @@ public class AppRestartTest : TestBed<TestProjectFixture>
        : base(testOutputHelper, fixture)
     {
     }
-    
+
     [Fact]
     public async Task ConcurrentPn532Access()
     {
@@ -30,31 +30,33 @@ public class AppRestartTest : TestBed<TestProjectFixture>
             }
             Assert.True(true);
         }
-        catch (TaskCanceledException ex)
-        {
-            _testOutputHelper.WriteLine("OK");
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
-            Assert.True(true);
-        }
-        catch (Exception ex)
-        {
-            _testOutputHelper.WriteLine("KO");
-            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
-            Assert.True(false);
-            throw;          
-        }
+        //catch (TaskCanceledException ex)
+        //{
+        //    _testOutputHelper.WriteLine("OK");
+        //    _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+        //    Assert.True(true);
+        //}
         //catch (Exception ex)
         //{
+        //    _testOutputHelper.WriteLine("KO");
         //    _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
-        //    if (ex is TaskCanceledException)// || ex is OperationCanceledException))
-        //    {
-        //        _testOutputHelper.WriteLine("Trowing...");
-        //        Assert.True(false);
-        //        throw;
-        //    }
-
+        //    Assert.True(false);
+        //    throw;          
         //}
-        
-        
+        catch (Exception ex)
+        {
+            _testOutputHelper.WriteLine($"{DateTimeOffset.Now.ToString()} {ex.ToString()}");
+            if (ex is TaskCanceledException || ex is OperationCanceledException)
+            {
+                _testOutputHelper.WriteLine("OK");
+                Assert.True(true);
+            }
+            else
+            {
+                _testOutputHelper.WriteLine("KO");
+                Assert.True(false);
+                throw;
+            }
+        }
     }
 }
